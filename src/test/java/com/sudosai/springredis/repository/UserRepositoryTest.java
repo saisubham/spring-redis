@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class UserRepositoryTest {
-   /* @Autowired
+    @Autowired
     private UserRepository userRepository;
 
     private User user;
@@ -55,5 +55,5 @@ class UserRepositoryTest {
         Long id = userRepository.save(user).getId();
         userRepository.deleteById(id);
         assertThrows(JpaObjectRetrievalFailureException.class, () -> userRepository.getById(id));
-    }*/
+    }
 }
