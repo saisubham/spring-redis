@@ -1,9 +1,8 @@
 package com.sudosai.springredis.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import reactor.util.annotation.Nullable;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -12,6 +11,11 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+
+    @Column(
+            nullable = false,
+            unique = true
+    )
     private String email;
 
     public User() {
