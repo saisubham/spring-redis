@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/demodb
+    username: sai
+    password: 1234
+    driver-class-name: com.mysql.jdbc.Driver
+  cache:
+    type: redis
+    redis:
+      host: localhost
+      port: 6379
+      cache-null-values: true
