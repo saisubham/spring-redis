@@ -3,8 +3,10 @@ package com.sudosai.springredis.service;
 import com.sudosai.springredis.entity.User;
 import com.sudosai.springredis.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,8 +18,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
+    private final static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
     @Override
     public User saveUser(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -46,6 +51,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CacheEvict(value = "users")
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }

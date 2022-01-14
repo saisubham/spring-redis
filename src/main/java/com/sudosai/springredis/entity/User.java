@@ -1,7 +1,5 @@
 package com.sudosai.springredis.entity;
 
-import reactor.util.annotation.Nullable;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -10,7 +8,15 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(
+            nullable = false,
+            unique = true
+    )
     private String name;
+
+    private String password;
+    private String role;
 
     @Column(
             nullable = false,
@@ -21,9 +27,11 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Long id, String name, String email) {
+    public User(Long id, String name, String password, String role, String email) {
         this.id = id;
         this.name = name;
+        this.password = password;
+        this.role = role;
         this.email = email;
     }
 
@@ -43,6 +51,22 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -54,8 +78,8 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
                 ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
